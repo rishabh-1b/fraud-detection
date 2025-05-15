@@ -4,6 +4,12 @@ import DetectionForm from '../components/DetectionForm';
 
 const DetectionPage = () => {
   const [activeTab, setActiveTab] = useState('phone');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleOnSubmit = async (input) => {
+    setIsLoading(true);
+  };
 
   return (
     <div className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -18,11 +24,10 @@ const DetectionPage = () => {
         <div className="flex border-b border-gray-200">
           <button
             onClick={() => setActiveTab('phone')}
-            className={`flex-1 py-4 px-4 text-center font-medium text-sm focus:outline-none transition-colors duration-200 ${
-              activeTab === 'phone'
-                ? 'bg-indigo-50 text-indigo-700 border-b-2 border-indigo-500'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
+            className={`flex-1 py-4 px-4 text-center font-medium text-sm focus:outline-none transition-colors duration-200 ${activeTab === 'phone'
+              ? 'bg-indigo-50 text-indigo-700 border-b-2 border-indigo-500'
+              : 'text-gray-500 hover:text-gray-700'
+              }`}
           >
             <div className="flex items-center justify-center">
               <Phone className="h-5 w-5 mr-2" />
@@ -32,11 +37,10 @@ const DetectionPage = () => {
 
           <button
             onClick={() => setActiveTab('email')}
-            className={`flex-1 py-4 px-4 text-center font-medium text-sm focus:outline-none transition-colors duration-200 ${
-              activeTab === 'email'
-                ? 'bg-indigo-50 text-indigo-700 border-b-2 border-indigo-500'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
+            className={`flex-1 py-4 px-4 text-center font-medium text-sm focus:outline-none transition-colors duration-200 ${activeTab === 'email'
+              ? 'bg-indigo-50 text-indigo-700 border-b-2 border-indigo-500'
+              : 'text-gray-500 hover:text-gray-700'
+              }`}
           >
             <div className="flex items-center justify-center">
               <Mail className="h-5 w-5 mr-2" />
@@ -46,11 +50,10 @@ const DetectionPage = () => {
 
           <button
             onClick={() => setActiveTab('url')}
-            className={`flex-1 py-4 px-4 text-center font-medium text-sm focus:outline-none transition-colors duration-200 ${
-              activeTab === 'url'
-                ? 'bg-indigo-50 text-indigo-700 border-b-2 border-indigo-500'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
+            className={`flex-1 py-4 px-4 text-center font-medium text-sm focus:outline-none transition-colors duration-200 ${activeTab === 'url'
+              ? 'bg-indigo-50 text-indigo-700 border-b-2 border-indigo-500'
+              : 'text-gray-500 hover:text-gray-700'
+              }`}
           >
             <div className="flex items-center justify-center">
               <Globe className="h-5 w-5 mr-2" />
@@ -60,7 +63,13 @@ const DetectionPage = () => {
         </div>
 
         <div className="p-6">
-          <DetectionForm/>
+          <DetectionForm
+            type={activeTab}
+            onSubmit={handleOnSubmit}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            error={error}
+          />
         </div>
       </div>
 
